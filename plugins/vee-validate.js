@@ -1,5 +1,5 @@
 import { extend } from "vee-validate";
-import { required, max, numeric } from "vee-validate/dist/rules";
+import { required, max, numeric, min_value } from "vee-validate/dist/rules";
 
 extend("required", {
   ...required,
@@ -15,9 +15,9 @@ extend("max", {
   ...max
 });
 
-extend("above-25", {
-  message: "You must be 25 years old or older",
-  validate: (value) => {
-    return value >= 25;
+extend("min_value", {
+  ...min_value,
+  message: (value, args) => {
+    return `You must be ${args.min} years old or older `;
   }
 });

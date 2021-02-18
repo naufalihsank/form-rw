@@ -103,7 +103,7 @@
           <ValidationProvider
             v-slot="{ errors }"
             name="age"
-            rules="required|numeric|above-25"
+            rules="required|numeric|min_value:25"
           >
             <v-text-field
               v-model="form.age"
