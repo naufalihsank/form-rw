@@ -258,7 +258,6 @@ export default {
       if (!valid) {
         return;
       }
-      console.log(this.form);
       setTimeout(function () {
         this.isLoading = true;
       }, 5000);
