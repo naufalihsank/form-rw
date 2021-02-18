@@ -158,16 +158,6 @@
             :rules="rules"
             hide-details
           ></v-checkbox>
-          <!-- <v-row class="mx-0 mt-1">
-            <v-checkbox
-              :rules="rules"
-              hide-details
-            ></v-checkbox>
-            <v-text-field
-              placeholder="Lainnya"
-              v-model="form.notes"
-            ></v-text-field>
-          </v-row> -->
         </v-col>
       </v-row>
       <v-row>
