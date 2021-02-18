@@ -174,7 +174,7 @@
           ></v-checkbox>
         </ValidationProvider>
       </v-row>
-      <v-btn @click="handleSave" :loading="isLoading"> simpan </v-btn>
+      <v-btn type="submit" @click="handleSave" :loading="isLoading"> simpan </v-btn>
     </form>
   </ValidationObserver>
 </template>
