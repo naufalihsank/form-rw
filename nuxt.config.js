@@ -3,7 +3,7 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - form-rw',
+    titleTemplate: '%s - Form RW',
     title: 'form-rw',
     meta: [
       { charset: 'utf-8' },
