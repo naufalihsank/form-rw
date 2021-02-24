@@ -84,6 +84,32 @@
               dense
             ></v-text-field>
           </ValidationProvider>
+          <ValidationProvider
+            v-slot="{ errors }"
+            name="ktpPhoto"
+            rules="required|size:2000|ext:jpg,jpeg,png,bmp"
+          >
+            <v-file-input
+              v-model="form.ktpPhoto"
+              label="Foto KTP"
+              :error-messages="errors"
+              outlined
+              dense
+            ></v-file-input>
+          </ValidationProvider>
+          <ValidationProvider
+            v-slot="{ errors }"
+            name="familyCardPhoto"
+            rules="required|size:2000|ext:jpg,jpeg,png,bmp"
+          >
+            <v-file-input
+              v-model="form.familyCardPhoto"
+              label="Foto Kartu Keluarga"
+              :error-messages="errors"
+              outlined
+              dense
+            ></v-file-input>
+          </ValidationProvider>
         </v-col>
         <v-col cols="12" md="6" sm="12">
           <ValidationProvider
@@ -141,23 +167,21 @@
           </ValidationProvider>
           <label>Alasan membutuhkan bantuan</label>
           <v-checkbox
-            v-model="form.isLostJob"
-            label="Kehilangan pekerjaan"
+            v-for="(note, i) in notesList"
+            :key="i"
+            v-model="form.notes"
+            :label="note.label"
+            :value="note.value"
             :rules="rules"
             hide-details
           ></v-checkbox>
-          <v-checkbox
-            v-model="form.isCovidVictim"
-            label="Kepala keluarga terdampak atau korban covid"
-            :rules="rules"
-            hide-details
-          ></v-checkbox>
-          <v-checkbox
-            v-model="form.isPoor"
-            label="Tergolong fakir/miskin semenjak sebelum covid"
-            :rules="rules"
-            hide-details
-          ></v-checkbox>
+          <v-text-field
+            v-model="form.other"
+            placeholder="Lainnya"
+            outlined
+            dense
+            class="mt-4"
+          ></v-text-field>
         </v-col>
       </v-row>
       <v-row>
@@ -174,7 +198,9 @@
           ></v-checkbox>
         </ValidationProvider>
       </v-row>
-      <v-btn type="submit" @click="handleSave" :loading="isLoading"> simpan </v-btn>
+      <v-btn type="submit" @click="handleSave" :loading="isLoading">
+        simpan
+      </v-btn>
     </form>
   </ValidationObserver>
 </template>
@@ -186,6 +212,11 @@ export default {
   components: {
     ValidationProvider,
     ValidationObserver,
+  },
+  head() {
+      return {
+        title: 'Input'
+      }
   },
   data() {
     return {
@@ -205,6 +236,8 @@ export default {
         isPoor: null,
         other: null,
         agreement: null,
+        ktpPhoto: null,
+        familyCardPhoto: null,
         notes: [],
       },
       genderList: [
@@ -231,8 +264,8 @@ export default {
           value: "Tergolong fakir/miskin semenjak sebelum covid",
         },
       ],
-      otherNotes: null,
-      isLoading: false
+      otherNotes: "",
+      isLoading: false,
     };
   },
   computed: {
@@ -244,13 +277,15 @@ export default {
   },
   methods: {
     async handleSave() {
+      this.isLoading = true;
       const valid = await this.$refs.observer.validate();
       if (!valid) {
         return;
       }
       setTimeout(function () {
-        this.isLoading = true;
-      }, 5000);
+        let success = Math.round(Math.random());
+        this.isLoading = false;
+      }, 1500);
     },
   },
 };
